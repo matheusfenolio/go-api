@@ -1,2 +1,2 @@
-# go-lang-api
+# go-api
 Basic project to learn how to use Go + Gin + GORM
