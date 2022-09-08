@@ -5,11 +5,11 @@ build:
 	go build ./src/cmd
 
 image:
-	podman build -t api .
+	docker build -t api .
 
 container:
-	podman run -it --rm --name my-api -p 8080:8080 -e HOST=192.168.1.16 localhost/api
+	docker run -it --rm --name my-api -p 8080:8080 -e HOST=192.168.1.16 localhost/api
 
 compose:
-	podman-compose up
+	docker-compose up
 
