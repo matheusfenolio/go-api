@@ -1,0 +1,42 @@
+version: '3'
+services:
+  go_api:
+    build: .
+    container_name: go_api
+    ports:
+      - "8080:8080"
+    environment:
+      HOST: postgres_go_api
+      USERNAME: api_user
+      PASSWORD: 4p!User
+      DATABSE: go_api
+      DB_PORT: 5432
+      SDSLMODE: disable
+      TIMEZONE: UTC
+    networks: 
+      - go_api_net
+    links:
+      - go_api_db
+    depends_on: 
+      go_api_db:
+        condition: service_healthy
+
+  go_api_db:
+    image: postgres:alpine
+    container_name: postgres_go_api
+    environment:
+      POSTGRES_USER: api_user
+      POSTGRES_PASSWORD: 4p!User
+      POSTGRES_DB: go_api
+    ports:
+      - "5432:5432"
+    networks: 
+      - go_api_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -q -d go_api -U api_user" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  go_api_net:
