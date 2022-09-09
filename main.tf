@@ -8,7 +8,9 @@ terraform {
 }
 
 provider "docker" {
-    host = "tcp://localhost:8090"
+    # If you'd like to use docker remote or Podman
+    # podman system service tcp:localhost:8090 --time=0
+    # host = "tcp://localhost:8090"
 }
 
 resource "docker_image" "database" {
