@@ -13,3 +13,9 @@ container:
 compose:
 	podman-compose up
 
+apply:
+	terraform apply
+
+destroy:
+	terraform destroy
+
