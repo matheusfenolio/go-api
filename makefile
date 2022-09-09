@@ -13,3 +13,9 @@ container:
 compose:
 	docker-compose up
 
+apply:
+	terraform apply
+
+destroy:
+	terraform destroy
+
