@@ -4,7 +4,7 @@ COPY go.mod ./
 COPY go.sum ./
 RUN go mod download
 COPY ./src ./src
-RUN go build ./src/cmd
+RUN go build ./src/main.go
 
 
 FROM alpine:latest  
@@ -18,4 +18,4 @@ ENV DATABSE=gorm
 ENV DB_PORT=5432
 ENV SDSLMODE=disable
 ENV TIMEZONE=UTC
-CMD ["./cmd"]  
+CMD ["./main"]  

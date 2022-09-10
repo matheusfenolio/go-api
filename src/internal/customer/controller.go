@@ -1,18 +1,16 @@
-package routers
+package customer
 
 import (
-	customer "go-api/src/customer"
-
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
 
-func Customers(router *gin.RouterGroup) {
+func InitCustomerController(router *gin.RouterGroup) {
 	customersRoute := router.Group("/customer")
 
 	customersRoute.GET("/", func(context *gin.Context) {
-		response, err := customer.GetCustumers()
+		response, err := GetCustumers()
 
 		if err != nil {
 			context.AbortWithStatus(404)
@@ -25,7 +23,7 @@ func Customers(router *gin.RouterGroup) {
 	customersRoute.GET("/:id", func(context *gin.Context) {
 		id, _ := strconv.Atoi(context.Param("id"))
 
-		response, err := customer.GetCustomerById(id)
+		response, err := GetCustomerById(id)
 
 		if err != nil {
 			context.AbortWithStatus(404)
@@ -37,7 +35,7 @@ func Customers(router *gin.RouterGroup) {
 
 	customersRoute.POST("/", func(context *gin.Context) {
 
-		var data customer.CustomerResquest
+		var data CustomerResquest
 
 		err := context.ShouldBind(&data)
 
@@ -46,7 +44,7 @@ func Customers(router *gin.RouterGroup) {
 			return
 		}
 
-		response, err := customer.CreateCustomer(data)
+		response, err := CreateCustomer(data)
 
 		if err != nil {
 			context.AbortWithStatus(500)
@@ -58,7 +56,7 @@ func Customers(router *gin.RouterGroup) {
 
 	customersRoute.PUT("/:id", func(context *gin.Context) {
 
-		var data customer.CustomerResquest
+		var data CustomerResquest
 
 		err := context.ShouldBind(&data)
 
@@ -69,7 +67,7 @@ func Customers(router *gin.RouterGroup) {
 
 		id, _ := strconv.Atoi(context.Param("id"))
 
-		err = customer.ChangeCustomer(id, data)
+		err = ChangeCustomer(id, data)
 
 		if err != nil {
 			context.AbortWithError(500, err)
@@ -82,7 +80,7 @@ func Customers(router *gin.RouterGroup) {
 	customersRoute.DELETE("/:id", func(context *gin.Context) {
 		id, _ := strconv.Atoi(context.Param("id"))
 
-		err := customer.DeleteCustomer(id)
+		err := DeleteCustomer(id)
 
 		if err != nil {
 			context.AbortWithError(500, err)
@@ -93,11 +91,11 @@ func Customers(router *gin.RouterGroup) {
 	})
 }
 
-func convertCustomerListToCustomerResponseList(customers []customer.Customer) []customer.CustomerResponse {
-	var customersResponse []customer.CustomerResponse
+func convertCustomerListToCustomerResponseList(customers []Customer) []CustomerResponse {
+	var customersResponse []CustomerResponse
 
-	for _, customer := range customers {
-		customersResponse = append(customersResponse, customer.ConvertToCustomerResponse())
+	for _, item := range customers {
+		customersResponse = append(customersResponse, item.ConvertToCustomerResponse())
 	}
 
 	return customersResponse

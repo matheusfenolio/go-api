@@ -1,8 +1,8 @@
 run:
-	go run src/cmd/main.go
+	go run src/main.go
 
 build:
-	go build ./src/cmd
+	go build ./src/main.go
 
 image:
 	docker build -t api .

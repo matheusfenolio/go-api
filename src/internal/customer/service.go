@@ -23,7 +23,7 @@ func ChangeCustomer(id int, customerRequest CustomerResquest) error {
 }
 
 func DeleteCustomer(id int) error {
-	return deleteCustomer(id)
+	return DeleteCustomer(id)
 }
 
 func convertRequestToEntity(customerRequest CustomerResquest) Customer {

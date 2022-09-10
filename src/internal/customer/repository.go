@@ -1,7 +1,7 @@
 package customer
 
 import (
-	"go-api/src/database"
+	"go-api/src/internal/database"
 
 	"gorm.io/gorm"
 )
