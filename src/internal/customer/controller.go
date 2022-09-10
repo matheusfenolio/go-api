@@ -10,20 +10,20 @@ func InitCustomerController(router *gin.RouterGroup) {
 	customersRoute := router.Group("/customer")
 
 	customersRoute.GET("/", func(context *gin.Context) {
-		response, err := GetCustumers()
+		response, err := service.getCustumers()
 
 		if err != nil {
 			context.AbortWithStatus(404)
 			return
 		}
 
-		context.JSON(200, convertCustomerListToCustomerResponseList(response))
+		context.JSON(200, mapper.convertCustomerListToCustomerResponseList(response))
 	})
 
 	customersRoute.GET("/:id", func(context *gin.Context) {
 		id, _ := strconv.Atoi(context.Param("id"))
 
-		response, err := GetCustomerById(id)
+		response, err := service.getCustomerById(id)
 
 		if err != nil {
 			context.AbortWithStatus(404)
@@ -44,7 +44,7 @@ func InitCustomerController(router *gin.RouterGroup) {
 			return
 		}
 
-		response, err := CreateCustomer(data)
+		response, err := service.createCustomer(mapper.convertRequestToEntity(data))
 
 		if err != nil {
 			context.AbortWithStatus(500)
@@ -67,7 +67,7 @@ func InitCustomerController(router *gin.RouterGroup) {
 
 		id, _ := strconv.Atoi(context.Param("id"))
 
-		err = ChangeCustomer(id, data)
+		err = service.updateCustomer(id, mapper.convertRequestToEntity(data))
 
 		if err != nil {
 			context.AbortWithError(500, err)
@@ -80,7 +80,7 @@ func InitCustomerController(router *gin.RouterGroup) {
 	customersRoute.DELETE("/:id", func(context *gin.Context) {
 		id, _ := strconv.Atoi(context.Param("id"))
 
-		err := DeleteCustomer(id)
+		err := service.deleteCustomer(id)
 
 		if err != nil {
 			context.AbortWithError(500, err)
@@ -89,14 +89,4 @@ func InitCustomerController(router *gin.RouterGroup) {
 
 		context.Status(200)
 	})
-}
-
-func convertCustomerListToCustomerResponseList(customers []Customer) []CustomerResponse {
-	var customersResponse []CustomerResponse
-
-	for _, item := range customers {
-		customersResponse = append(customersResponse, item.ConvertToCustomerResponse())
-	}
-
-	return customersResponse
 }

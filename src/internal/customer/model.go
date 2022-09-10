@@ -1,5 +1,14 @@
 package customer
 
+import "gorm.io/gorm"
+
+type Customer struct {
+	gorm.Model
+	FirstName string
+	LastName  string
+	Email     string
+}
+
 type CustomerResponse struct {
 	FirstName string `json:"firstName"`
 	LastName  string `json:"lastName"`
