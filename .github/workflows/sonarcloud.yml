@@ -29,8 +29,6 @@
 name: SonarCloud analysis
 
 on:
-  push:
-    branches: [ "${GITHUB_REF#refs/heads/}" ]
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
