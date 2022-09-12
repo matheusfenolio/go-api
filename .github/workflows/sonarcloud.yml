@@ -43,6 +43,9 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - name: Generate code coverage report
+        run: make coverage
+
       - name: Analyze with SonarCloud         
 
         # You can pin the exact commit or the version.
