@@ -4,6 +4,10 @@ run:
 build:
 	go build ./src/main.go
 
+test:
+	go test ./src/internal/customer -coverprofile=coverage.out 
+	go tool cover -html=coverage.out
+
 image:
 	docker build -t api .
 

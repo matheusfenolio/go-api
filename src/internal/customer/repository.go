@@ -3,10 +3,6 @@ package customer
 type CustomerRepository struct {
 }
 
-func (r *CustomerRepository) Get() string {
-	return "Original"
-}
-
 func (r *CustomerRepository) fetchCustomers() ([]Customer, error) {
 	var customers []Customer
 	result := DBConnection.Find(&customers)
