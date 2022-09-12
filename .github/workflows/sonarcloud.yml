@@ -44,7 +44,7 @@ jobs:
     
     steps:
       - name: Generate code coverage report
-        run: make coverage
+        run: go test ./src/internal/customer -coverprofile=src/coverage.out
 
       - name: Analyze with SonarCloud         
 
