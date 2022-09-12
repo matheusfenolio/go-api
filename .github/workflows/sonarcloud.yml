@@ -43,6 +43,12 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+
+      - name: Generate code coverage report
+        run: go test ./src/internal/customer -coverprofile=src/coverage.out
+
       - name: Analyze with SonarCloud         
 
         # You can pin the exact commit or the version.

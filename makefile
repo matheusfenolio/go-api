@@ -5,8 +5,11 @@ build:
 	go build ./src/main.go
 
 test:
-	go test ./src/internal/customer -coverprofile=coverage.out 
+	go test ./src/internal/customer -coverprofile=coverage.out
 	go tool cover -html=coverage.out
+
+coverage:
+	go test ./src/internal/customer -coverprofile=src/coverage.out
 
 image:
 	docker build -t api .
