@@ -5,7 +5,7 @@ build:
 	go build ./src/main.go
 
 test:
-	go test ./src/internal/customer
+	go test ./src/internal/customer -coverprofile=coverage.out
 
 coverage:
 	go test ./src/internal/customer -coverprofile=coverage.out 
