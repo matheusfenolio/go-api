@@ -5,3 +5,6 @@ Basic project to learn how to use Go + Gin + GORM
 
 ## Docker hub
 You can also download from DockerHub: https://hub.docker.com/repository/docker/matheusfenolio/go-api
+
+## SonarQube
+Check [sonar validation](https://sonarcloud.io/project/overview?id=matheusfenolio_go-api) 
