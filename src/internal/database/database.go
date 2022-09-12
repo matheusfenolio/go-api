@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+	"go-api/src/internal/customer"
 	"os"
 
 	"gorm.io/driver/postgres"
@@ -30,4 +31,10 @@ func InitDatabase() {
 	if err != nil {
 		panic("failed to connect database")
 	}
+
+	injectDependency()
+}
+
+func injectDependency() {
+	customer.InitCustomerRepository(DBConnection)
 }

@@ -1,35 +1,28 @@
 package customer
 
-func GetCustumers() ([]Customer, error) {
-	customers, err := fetchCustomers()
+type CustomerService struct {
+}
+
+func (s *CustomerService) getCustumers() ([]Customer, error) {
+	customers, err := respository.fetchCustomers()
 	return customers, err
 }
 
-func GetCustomerById(id int) (Customer, error) {
-	customer, err := fetchCustomer(id)
+func (s *CustomerService) getCustomerById(id int) (Customer, error) {
+	customer, err := respository.fetchCustomer(id)
 
 	return customer, err
 }
 
-func CreateCustomer(customerRequest CustomerResquest) (Customer, error) {
-	newCustomer := convertRequestToEntity(customerRequest)
-	customer, err := saveCustomer(newCustomer)
+func (s *CustomerService) createCustomer(customerToCreate Customer) (Customer, error) {
+	customer, err := respository.saveCustomer(customerToCreate)
 	return customer, err
 }
 
-func ChangeCustomer(id int, customerRequest CustomerResquest) error {
-	customerToChange := convertRequestToEntity(customerRequest)
-	return updateCustomer(id, customerToChange)
+func (s *CustomerService) updateCustomer(id int, customerToUpdate Customer) error {
+	return respository.updateCustomer(id, customerToUpdate)
 }
 
-func DeleteCustomer(id int) error {
-	return DeleteCustomer(id)
-}
-
-func convertRequestToEntity(customerRequest CustomerResquest) Customer {
-	return Customer{
-		FirstName: customerRequest.FirstName,
-		LastName:  customerRequest.LastName,
-		Email:     customerRequest.Email,
-	}
+func (s *CustomerService) deleteCustomer(id int) error {
+	return respository.deleteCustomer(id)
 }

@@ -1,45 +1,31 @@
 package customer
 
-import (
-	"go-api/src/internal/database"
-
-	"gorm.io/gorm"
-)
-
-type Customer struct {
-	gorm.Model
-	FirstName string
-	LastName  string
-	Email     string
+type CustomerRepository struct {
 }
 
-func (customer Customer) ConvertToCustomerResponse() CustomerResponse {
-	return CustomerResponse{
-		FirstName: customer.FirstName,
-		LastName:  customer.LastName,
-		Email:     customer.Email,
-	}
+func (r *CustomerRepository) Get() string {
+	return "Original"
 }
 
-func fetchCustomers() ([]Customer, error) {
+func (r *CustomerRepository) fetchCustomers() ([]Customer, error) {
 	var customers []Customer
-	result := database.DBConnection.Find(&customers)
+	result := DBConnection.Find(&customers)
 	return customers, result.Error
 }
 
-func fetchCustomer(id int) (Customer, error) {
+func (r *CustomerRepository) fetchCustomer(id int) (Customer, error) {
 	var customer Customer
-	result := database.DBConnection.First(&customer, id)
+	result := DBConnection.First(&customer, id)
 	return customer, result.Error
 }
 
-func saveCustomer(customer Customer) (Customer, error) {
-	result := database.DBConnection.Create(&customer)
+func (r *CustomerRepository) saveCustomer(customer Customer) (Customer, error) {
+	result := DBConnection.Create(&customer)
 	return customer, result.Error
 }
 
-func updateCustomer(id int, customer Customer) error {
-	result := database.DBConnection.Model(&Customer{}).Where("id = ?", id).Updates(
+func (r *CustomerRepository) updateCustomer(id int, customer Customer) error {
+	result := DBConnection.Model(&Customer{}).Where("id = ?", id).Updates(
 		Customer{
 			FirstName: customer.FirstName,
 			LastName:  customer.LastName,
@@ -49,7 +35,7 @@ func updateCustomer(id int, customer Customer) error {
 	return result.Error
 }
 
-func deleteCustomer(id int) error {
-	result := database.DBConnection.Delete(&Customer{}, id)
+func (r *CustomerRepository) deleteCustomer(id int) error {
+	result := DBConnection.Delete(&Customer{}, id)
 	return result.Error
 }
