@@ -1,4 +1,4 @@
-name: build
+name: Tryvi Scann
 on:
   push:
     branches:
