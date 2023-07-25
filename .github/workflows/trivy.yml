@@ -19,4 +19,4 @@ jobs:
         scan-ref: '.'
         trivy-config:
           exit-code: 1
-          severity: CRITICAL
+          severity: HIGH
