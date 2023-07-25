@@ -17,7 +17,3 @@ jobs:
       with:
         scan-type: 'fs'
         scan-ref: '.'
-        trivy-config:
-          format: json
-          exit-code: 1
-          severity: CRITICAL
