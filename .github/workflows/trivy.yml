@@ -1,13 +1,13 @@
 name: Tryvi Scan
 on:
   push:
-    branches:
-    - master
+    branches: [ "main" ]
   pull_request:
+    branches: [ "main" ]
 jobs:
   build:
-    name: Build
-    runs-on: ubuntu-20.04
+    name: Scanning
+    runs-on: ubuntu-22.04
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
