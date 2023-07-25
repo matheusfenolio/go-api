@@ -1,4 +1,4 @@
-name: Tryvi Scann
+name: Tryvi Scan
 on:
   push:
     branches:
