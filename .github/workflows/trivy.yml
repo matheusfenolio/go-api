@@ -17,6 +17,5 @@ jobs:
       with:
         scan-type: 'fs'
         scan-ref: '.'
-        trivy-config:
-          exit-code: 1
-          severity: HIGH
+        exit-code: '1'
+        severity: 'CRITICAL,HIGH'
