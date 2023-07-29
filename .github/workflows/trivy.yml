@@ -1,23 +1,22 @@
-name: build
+name: Tryvi Scan
 on:
   push:
-    branches:
-    - master
+    branches: [ "main" ]
   pull_request:
+    branches: [ "main" ]
 jobs:
   build:
-    name: Build
-    runs-on: ubuntu-20.04
+    name: Scanning
+    runs-on: ubuntu-22.04
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Run Trivy vulnerability scanner in fs mode
+    - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
       with:
         scan-type: 'fs'
+        scanners: 'vuln,secret,config'
         scan-ref: '.'
-        trivy-config:
-          format: json
-          exit-code: 1
-          severity: CRITICAL
+        exit-code: '1'
+        severity: 'UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL'
