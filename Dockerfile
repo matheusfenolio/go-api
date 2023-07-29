@@ -1,3 +1,6 @@
+RUN useradd -u 8877 user_runner
+USER user_runner
+
 FROM golang:1.20-alpine AS builder
 WORKDIR /app
 COPY go.mod ./

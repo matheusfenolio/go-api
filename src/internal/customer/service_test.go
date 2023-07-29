@@ -15,37 +15,37 @@ import (
 	"gorm.io/gorm"
 )
 
-// type Suite struct {
-// 	suite.Suite
-// 	DB   *gorm.DB
-// 	mock sqlmock.Sqlmock
+type Suite struct {
+	suite.Suite
+	DB   *gorm.DB
+	mock sqlmock.Sqlmock
 
-// 	person *customer.Customer
-// }
+	person *customer.Customer
+}
 
-// func (s *Suite) SetupSuite() {
-// 	var (
-// 		db  *sql.DB
-// 		err error
-// 	)
+func (s *Suite) SetupSuite() {
+	var (
+		db  *sql.DB
+		err error
+	)
 
-// 	db, s.mock, err = sqlmock.New()
-// 	require.NoError(s.T(), err)
+	db, s.mock, err = sqlmock.New()
+	require.NoError(s.T(), err)
 
-// 	dialector := postgres.New(postgres.Config{
-// 		DSN:                  "sqlmock_db_0",
-// 		DriverName:           "postgres",
-// 		Conn:                 rs.conn,
-// 		PreferSimpleProtocol: true,
-// 	})
+	dialector := postgres.New(postgres.Config{
+		DSN:                  "sqlmock_db_0",
+		DriverName:           "postgres",
+		Conn:                 rs.conn,
+		PreferSimpleProtocol: true,
+	})
 
-// 	s.DB, err = gorm.Open(dialector, db)
-// 	require.NoError(s.T(), err)
+	s.DB, err = gorm.Open(dialector, db)
+	require.NoError(s.T(), err)
 
-// 	// s.DB.LogMode(true)
+	// s.DB.LogMode(true)
 
-// 	customer.InitCustomerRepository(s.DB)
-// }
+	customer.InitCustomerRepository(s.DB)
+}
 
 type AnyTime struct{}
 
