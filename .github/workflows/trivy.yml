@@ -12,24 +12,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Run Trivy vulnerability scanner in fs mode
+    - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
       with:
-        scan-type: 'fs'
+        scanners: 'fs,rootfs,repo,vuln,secret,config'
         scan-ref: '.'
-        exit-code: '1'
-        severity: 'CRITICAL,HIGH'
-
-    - name: Run Trivy vulnerability scanner with rootfs command
-      uses: aquasecurity/trivy-action@master
-      with:
-        scan-type: 'rootfs'
-        scan-ref: '.'
-        severity: 'CRITICAL'
-
-    - name: Run Trivy vulnerability scanner in IaC mode
-      uses: aquasecurity/trivy-action@master
-      with:
-        scan-type: 'config'
         exit-code: '1'
         severity: 'CRITICAL,HIGH'
