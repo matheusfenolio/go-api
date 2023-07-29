@@ -21,15 +21,15 @@ jobs:
         severity: 'CRITICAL,HIGH'
 
     - name: Run Trivy vulnerability scanner with rootfs command
-        uses: aquasecurity/trivy-action@master
-        with:
-          scan-type: 'rootfs'
-          scan-ref: '.'
-          severity: 'CRITICAL'
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'rootfs'
+        scan-ref: '.'
+        severity: 'CRITICAL'
 
     - name: Run Trivy vulnerability scanner in IaC mode
-        uses: aquasecurity/trivy-action@master
-        with:
-          scan-type: 'config'
-          exit-code: '1'
-          severity: 'CRITICAL,HIGH'
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'config'
+        exit-code: '1'
+        severity: 'CRITICAL,HIGH'
